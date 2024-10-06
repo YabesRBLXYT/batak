@@ -49,14 +49,6 @@
         button:hover {
             background-color: #0056b3;
         }
-
-        .correct {
-            background-color: #28a745;
-        }
-
-        .wrong {
-            background-color: #dc3545;
-        }
     </style>
 </head>
 <body>
@@ -69,43 +61,37 @@
 </div>
 
 <script>
-    const angkaBatak = {
-        1: 'Sada',
-        2: 'Dua',
-        3: 'Tolu',
-        4: 'Opat',
-        5: 'Lima',
-        6: 'Onom',
-        7: 'Pitu',
-        8: 'Walu',
-        9: 'Sia',
-        10: 'Sapulu',
-        11: 'Sampulu sada',
-        12: 'Sampulu dua',
-        13: 'Sampulu tolu',
-        14: 'Sampulu opat',
-        15: 'Sampulu lima',
-        16: 'Sampulu onom',
-        17: 'Sampulu pitu',
-        18: 'Sampulu walu',
-        19: 'Sampulu sia',
-        20: 'Dua pulu',
-        // Lanjutkan sampai 100
-        100: 'Satus'
-    };
+    let angkaBatak = {};
+    let askedQuestions = [];
 
-    let currentNumber = 1;
+    // Load data from number.json
+    fetch('number.json')
+        .then(response => response.json())
+        .then(data => {
+            angkaBatak = data.numbers;
+            generateRandomQuestion(); // Start quiz once data is loaded
+        })
+        .catch(error => console.error('Error fetching number.json:', error));
 
-    function generateQuestion(number) {
+    function generateRandomQuestion() {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+        } while (askedQuestions.includes(randomNumber) && askedQuestions.length < 50);
+
+        if (askedQuestions.length >= 50) {
+            askedQuestions = []; // Reset kalau sudah 50 soal ditanyakan
+        }
+        askedQuestions.push(randomNumber);
+
+        const correctAnswer = angkaBatak[randomNumber];
         const questionElement = document.getElementById('question');
-        questionElement.textContent = `Apa bahasa Batak dari angka ${number}?`;
+        questionElement.textContent = `Apa bahasa Batak dari angka ${randomNumber}?`;
 
         const optionsElement = document.getElementById('options');
         optionsElement.innerHTML = '';
 
-        const correctAnswer = angkaBatak[number];
-        const wrongAnswers = generateWrongAnswers(number);
-
+        const wrongAnswers = generateWrongAnswers(randomNumber);
         const allAnswers = shuffle([correctAnswer, ...wrongAnswers]);
 
         allAnswers.forEach(answer => {
@@ -140,23 +126,11 @@
     function checkAnswer(selectedAnswer, correctAnswer) {
         if (selectedAnswer === correctAnswer) {
             alert('Benar!');
-            nextQuestion();
         } else {
             alert('Salah! Jawaban yang benar adalah: ' + correctAnswer);
         }
+        generateRandomQuestion(); // Lanjutkan ke soal berikutnya
     }
-
-    function nextQuestion() {
-        currentNumber++;
-        if (currentNumber <= 100) {
-            generateQuestion(currentNumber);
-        } else {
-            alert('Selamat! Kamu sudah menyelesaikan semua soal!');
-        }
-    }
-
-    // Tampilkan soal pertama
-    generateQuestion(currentNumber);
 </script>
 
 </body>
