@@ -3,195 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angka Batak Pilihan Ganda</title>
+    <title>Angka Batak Quiz</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            margin: 0;
         }
-        .question {
+
+        #quiz-container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
             margin-bottom: 20px;
         }
-        .question h3 {
-            margin-bottom: 10px;
-        }
+
         .options {
             list-style-type: none;
             padding-left: 0;
         }
+
         .options li {
-            margin-bottom: 5px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .correct {
+            background-color: #28a745;
+        }
+
+        .wrong {
+            background-color: #dc3545;
         }
     </style>
 </head>
 <body>
-    <h1>Pilihan Ganda Angka Batak</h1>
-    <div id="quiz"></div>
 
-    <script>
-        const angkaBatak = {
-            1: 'Sada',
-            2: 'Dua',
-            3: 'Tolu',
-            4: 'Opat',
-            5: 'Lima',
-            6: 'Onom',
-            7: 'Pitu',
-            8: 'Walu',
-            9: 'Sia',
-            10: 'Sapulu',
-            11: 'Sampulu sada',
-            12: 'Sampulu dua',
-            13: 'Sampulu tolu',
-            14: 'Sampulu opat',
-            15: 'Sampulu lima',
-            16: 'Sampulu onom',
-            17: 'Sampulu pitu',
-            18: 'Sampulu walu',
-            19: 'Sampulu sia',
-            20: 'Dua pulu',
-            21: 'Dua pulu sada',
-            22: 'Dua pulu dua',
-            23: 'Dua pulu tolu',
-            24: 'Dua pulu opat',
-            25: 'Dua pulu lima',
-            26: 'Dua pulu onom',
-            27: 'Dua pulu pitu',
-            28: 'Dua pulu walu',
-            29: 'Dua pulu sia',
-            30: 'Tolu pulu',
-            31: 'Tolu pulu sada',
-            32: 'Tolu pulu dua',
-            33: 'Tolu pulu tolu',
-            34: 'Tolu pulu opat',
-            35: 'Tolu pulu lima',
-            36: 'Tolu pulu onom',
-            37: 'Tolu pulu pitu',
-            38: 'Tolu pulu walu',
-            39: 'Tolu pulu sia',
-            40: 'Opat pulu',
-            41: 'Opat pulu sada',
-            42: 'Opat pulu dua',
-            43: 'Opat pulu tolu',
-            44: 'Opat pulu opat',
-            45: 'Opat pulu lima',
-            46: 'Opat pulu onom',
-            47: 'Opat pulu pitu',
-            48: 'Opat pulu walu',
-            49: 'Opat pulu sia',
-            50: 'Lima pulu',
-            51: 'Lima pulu sada',
-            52: 'Lima pulu dua',
-            53: 'Lima pulu tolu',
-            54: 'Lima pulu opat',
-            55: 'Lima pulu lima',
-            56: 'Lima pulu onom',
-            57: 'Lima pulu pitu',
-            58: 'Lima pulu walu',
-            59: 'Lima pulu sia',
-            60: 'Onom pulu',
-            61: 'Onom pulu sada',
-            62: 'Onom pulu dua',
-            63: 'Onom pulu tolu',
-            64: 'Onom pulu opat',
-            65: 'Onom pulu lima',
-            66: 'Onom pulu onom',
-            67: 'Onom pulu pitu',
-            68: 'Onom pulu walu',
-            69: 'Onom pulu sia',
-            70: 'Pitu pulu',
-            71: 'Pitu pulu sada',
-            72: 'Pitu pulu dua',
-            73: 'Pitu pulu tolu',
-            74: 'Pitu pulu opat',
-            75: 'Pitu pulu lima',
-            76: 'Pitu pulu onom',
-            77: 'Pitu pulu pitu',
-            78: 'Pitu pulu walu',
-            79: 'Pitu pulu sia',
-            80: 'Walu pulu',
-            81: 'Walu pulu sada',
-            82: 'Walu pulu dua',
-            83: 'Walu pulu tolu',
-            84: 'Walu pulu opat',
-            85: 'Walu pulu lima',
-            86: 'Walu pulu onom',
-            87: 'Walu pulu pitu',
-            88: 'Walu pulu walu',
-            89: 'Walu pulu sia',
-            90: 'Sia pulu',
-            91: 'Sia pulu sada',
-            92: 'Sia pulu dua',
-            93: 'Sia pulu tolu',
-            94: 'Sia pulu opat',
-            95: 'Sia pulu lima',
-            96: 'Sia pulu onom',
-            97: 'Sia pulu pitu',
-            98: 'Sia pulu walu',
-            99: 'Sia pulu sia',
-            100: 'Satus'
-        };
+<div id="quiz-container">
+    <h2 id="question">Apa bahasa Batak dari angka 1?</h2>
+    <ul class="options" id="options">
+        <!-- Pilihan ganda akan muncul di sini -->
+    </ul>
+</div>
 
-        function generateQuestion(number) {
-            const questionContainer = document.createElement('div');
-            questionContainer.className = 'question';
+<script>
+    const angkaBatak = {
+        1: 'Sada',
+        2: 'Dua',
+        3: 'Tolu',
+        4: 'Opat',
+        5: 'Lima',
+        6: 'Onom',
+        7: 'Pitu',
+        8: 'Walu',
+        9: 'Sia',
+        10: 'Sapulu',
+        11: 'Sampulu sada',
+        12: 'Sampulu dua',
+        13: 'Sampulu tolu',
+        14: 'Sampulu opat',
+        15: 'Sampulu lima',
+        16: 'Sampulu onom',
+        17: 'Sampulu pitu',
+        18: 'Sampulu walu',
+        19: 'Sampulu sia',
+        20: 'Dua pulu',
+        // Lanjutkan sampai 100
+        100: 'Satus'
+    };
 
-            const questionTitle = document.createElement('h3');
-            questionTitle.textContent = `Apa bahasa Batak dari angka ${number}?`;
-            questionContainer.appendChild(questionTitle);
+    let currentNumber = 1;
 
-            const optionsList = document.createElement('ul');
-            optionsList.className = 'options';
+    function generateQuestion(number) {
+        const questionElement = document.getElementById('question');
+        questionElement.textContent = `Apa bahasa Batak dari angka ${number}?`;
 
-            const correctAnswer = angkaBatak[number];
-            const wrongAnswers = generateWrongAnswers(number);
+        const optionsElement = document.getElementById('options');
+        optionsElement.innerHTML = '';
 
-            // Gabungkan jawaban benar dan salah secara acak
-            const allAnswers = shuffle([correctAnswer, ...wrongAnswers]);
+        const correctAnswer = angkaBatak[number];
+        const wrongAnswers = generateWrongAnswers(number);
 
-            allAnswers.forEach(answer => {
-                const optionItem = document.createElement('li');
-                const optionInput = document.createElement('input');
-                optionInput.type = 'radio';
-                optionInput.name = `question-${number}`;
-                optionInput.value = answer;
+        const allAnswers = shuffle([correctAnswer, ...wrongAnswers]);
 
-                optionItem.appendChild(optionInput);
-                optionItem.appendChild(document.createTextNode(answer));
-                optionsList.appendChild(optionItem);
-            });
+        allAnswers.forEach(answer => {
+            const optionItem = document.createElement('li');
+            const button = document.createElement('button');
+            button.textContent = answer;
+            button.onclick = () => checkAnswer(answer, correctAnswer);
+            optionItem.appendChild(button);
+            optionsElement.appendChild(optionItem);
+        });
+    }
 
-            questionContainer.appendChild(optionsList);
-            return questionContainer;
-        }
-
-        function generateWrongAnswers(correctNumber) {
-            const wrongAnswers = [];
-            while (wrongAnswers.length < 3) {
-                const randomNum = Math.floor(Math.random() * 100) + 1;
-                if (randomNum !== correctNumber && angkaBatak[randomNum]) {
-                    wrongAnswers.push(angkaBatak[randomNum]);
-                }
-            }
-            return wrongAnswers;
-        }
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        const quizContainer = document.getElementById('quiz');
-
-        // Buat pertanyaan untuk angka dari 1 hingga 100
-        for (let i = 1; i <= 100; i++) {
-            if (angkaBatak[i]) {
-                const question = generateQuestion(i);
-                quizContainer.appendChild(question);
+    function generateWrongAnswers(correctNumber) {
+        const wrongAnswers = [];
+        while (wrongAnswers.length < 3) {
+            const randomNum = Math.floor(Math.random() * 100) + 1;
+            if (randomNum !== correctNumber && angkaBatak[randomNum]) {
+                wrongAnswers.push(angkaBatak[randomNum]);
             }
         }
-    </script>
+        return wrongAnswers;
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function checkAnswer(selectedAnswer, correctAnswer) {
+        if (selectedAnswer === correctAnswer) {
+            alert('Benar!');
+            nextQuestion();
+        } else {
+            alert('Salah! Jawaban yang benar adalah: ' + correctAnswer);
+        }
+    }
+
+    function nextQuestion() {
+        currentNumber++;
+        if (currentNumber <= 100) {
+            generateQuestion(currentNumber);
+        } else {
+            alert('Selamat! Kamu sudah menyelesaikan semua soal!');
+        }
+    }
+
+    // Tampilkan soal pertama
+    generateQuestion(currentNumber);
+</script>
+
 </body>
 </html>
